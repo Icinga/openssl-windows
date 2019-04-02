@@ -6,25 +6,19 @@ init:
 - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\VC\Auxiliary\Build\vcvars64.bat"
 
 install:
-- ps: >-
+- ps: |
     if (-Not (Test-Path "C:\Program Files\NASM")) {
       choco install nasm
-      if ($LastExitCode -ne 0) { $host.SetShouldExit($LastExitCode)  }
+      if ($LastExitCode -ne 0) { throw "Could not install NASM" }
     }
 
 cache:
   - C:\Program Files\NASM
 
 build_script:
-- ps: |
-    .\prepare.ps1
-    if ($LastExitCode -ne 0) { $host.SetShouldExit($LastExitCode)  }
-
-    .\build.ps1
-    if ($LastExitCode -ne 0) { $host.SetShouldExit($LastExitCode)  }
-
-    .\pack.ps1
-    if ($LastExitCode -ne 0) { $host.SetShouldExit($LastExitCode)  }
+- ps: .\prepare.ps1
+- ps: .\build.ps1
+- ps: .\pack.ps1
 
 test_script:
 - ps: .\test.ps1
