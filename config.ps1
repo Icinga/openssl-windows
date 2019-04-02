@@ -1,4 +1,3 @@
-#$ErrorActionPreference = "Stop"
 
 $global:OpenSSL_version = "1_1_0g"
 $global:OpenSSL_file = "OpenSSL_$OpenSSL_version.zip"
