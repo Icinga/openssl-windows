@@ -21,3 +21,5 @@ try {
 } catch {
   throw "Error during extract of archive"
 }
+
+exit 0
